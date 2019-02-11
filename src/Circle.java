@@ -4,6 +4,18 @@ public class Circle implements Cloneable{
     private Point center;
     private int radius;
 
+    @Override
+    public Circle clone(){
+        try {
+            Circle copy = (Circle) super.clone(); //shallow copy done
+            //support deep copy yourself
+            copy.center = center.clone();
+            return copy;
+        }catch(CloneNotSupportedException e){
+            return null; //never happen
+        }
+    }
+
     public Circle(Point center, int radius) {
         this.center = center;
         this.radius = radius;
@@ -44,14 +56,14 @@ public class Circle implements Cloneable{
         return Objects.hash(center, radius);
     }
 
-    @Override
-    public Circle clone() {
-        try {
-            Circle copy = (Circle) super.clone();
-            //copy.center = this.center.clone(); //deep copy!
-            return copy;
-        }catch(CloneNotSupportedException e){
-            return null; //never executed
-        }
-    }
+//    @Override
+//    public Circle clone() {
+//        try {
+//            Circle copy = (Circle) super.clone();
+//            //copy.center = this.center.clone(); //deep copy!
+//            return copy;
+//        }catch(CloneNotSupportedException e){
+//            return null; //never executed
+//        }
+//    }
 }

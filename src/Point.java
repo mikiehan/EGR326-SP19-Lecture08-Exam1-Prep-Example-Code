@@ -4,6 +4,10 @@ public class Point implements Cloneable{
     private int x;
     private int y;
 
+    public static void sayHello(){
+        System.out.println("hello");
+    }
+
     public Point(int x, int y) {
         this.x = x;
         this.y = y;
@@ -37,10 +41,16 @@ public class Point implements Cloneable{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Point point = (Point) o;
-        return x == point.x && y == point.y;
+        if(o != null && o.getClass() == getClass()) {
+            Point other = (Point) o;
+            return x == other.x && y == other.y;
+        } else {
+            return false;
+        }
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Point point = (Point) o;
+//        return x == point.x && y == point.y;
     }
 
     @Override
@@ -50,14 +60,13 @@ public class Point implements Cloneable{
 
     @Override
     public Point clone() {
-        //try {
-            //Point copy = (Point) super.clone(); //why this?
-            Point copy = new Point(x,y); //why not this?
-
+        try {
+            Point copy = (Point) super.clone(); //why this?
+            //Point copy = new Point(x,y); //why not this?
             return copy;
-        //} catch (CloneNotSupportedException e) {
+        } catch (CloneNotSupportedException e) {
             // this will never happen
-        //    return null;
-        //}
+            return null;
+        }
     }
 }
